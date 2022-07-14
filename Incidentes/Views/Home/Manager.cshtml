@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="row g-3">
+    <div class="col-auto">
+        <label for="idCliente" class="visually-hidden">Manager</label>
+        <input type="text" class="form-control" id="idCliente" placeholder="Ingrese ID" />
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary mb-3" onclick="ConsultarClienteManager()">Consultar</button>
+        </div>
+     </div>
+</form>
+<br />
+<br />
+<div class="row mb-4">
+    <div class="col-4">
+        <label for="IdIncidente" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" disabled>
+    </div>
+    <div class="col-4">
+        <label for="Fecha" class="form-label">Apellido Paterno</label>
+        <input type="text" class="form-control" id="apellidoPaterno" disabled>
+    </div>
+    <div class="col-4">
+        <label for="Estado" class="form-label">Apellido Materno</label>
+        <input type="text" class="form-control" id="apellidoMaterno" disabled>
+    </div>
+</div>
+
+
+<div class="row mb-4">
+    <div class="col-4">
+        <label for="Ciudad" class="form-label">Fecha Nacimiento</label>
+        <input type="text" class="form-control" id="fechaNacimiento" disabled>
+    </div>
+    <div class="col-4">
+        <label for="Dir" class="form-label">sexo</label>
+        <input type="text" class="form-control" id="sexo" disabled>
+    </div>
+    <div class="col-2">
+        <label for="Muertos" class="form-label">Segmento</label>
+        <input type="text" class="form-control" id="segmento" disabled>
+    </div>
+    <div class="col-2">
+        <label for="Heridos" class="form-label">Nacionalidad</label>
+        <input type="text" class="form-control" id="nacionalidad" disabled>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-4">
+        <label for="Ciudad" class="form-label">RFC</label>
+        <input type="text" class="form-control" id="rfc" disabled>
+    </div>
+    <div class="col-4">
+        <label for="Dir" class="form-label">Tipo ID</label>
+        <input type="text" class="form-control" id="tipoId" disabled>
+    </div>
+    <div class="col-2">
+        <label for="Muertos" class="form-label">numero ID</label>
+        <input type="text" class="form-control" id="numeroId" disabled>
+    </div>
+    <div class="col-2">
+        <label for="Heridos" class="form-label">Cuenta</label>
+        <input type="text" class="form-control" id="cuenta" disabled>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-4">
+        <label for="Ciudad" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" disabled>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function ConsultarClienteManager() {
+            debugger;
+            jQuery.ajax({
+                url: '@Url.Action("ConsultarClienteManager", "Home")',
+                type: "POST",
+                data: JSON.stringify({ idCliente: $("#idCliente").val() }),
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    $("#nombre").val(data.cliente.nombre);
+                    $("#apellidoPaterno").val(data.cliente.apellidoPaterno);
+                    $("#apellidoMaterno").val(data.cliente.apellidoMaterno);
+                    $("#fechaNacimiento").val(data.cliente.fechaNacimiento);
+                    $("#sexo").val(data.cliente.sexo);
+                    $("#segmento").val(data.cliente.segmento);
+                    $("#nacionalidad").val(data.cliente.nacionaldidad);
+                    $("#rfc").val(data.cliente.rfc);
+                    $("#tipoId").val(data.cliente.tipoID);
+                    $("#numeroId").val(data.cliente.numeroID);
+                    $("#sexo").val(data.cliente.sexo);
+                    $("#cuenta").val(data.cliente.cuenta);
+                    $("#email").val(data.cliente.email);
+                }
+            });
+        }
+      
+
+    </script>
+}
